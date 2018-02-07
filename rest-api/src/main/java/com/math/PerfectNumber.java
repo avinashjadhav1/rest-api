@@ -14,6 +14,7 @@ import java.util.InputMismatchException;
 
 public class PerfectNumber {
 		
+	
 	/**
 	 * String getResult
 	 * @param num
@@ -24,28 +25,31 @@ public class PerfectNumber {
 		/*
 		 * Initializing variables
 		 */
-		
+		final String msgPositveNumber="Please enter positive number";
+		final String msgLargeNumber="Number too large to process. Maximum allowed length is 10";
+		final String resultYes="YES";
+		final String resultNo="NO";	
 		long n, sum=0;
 		String result="";
 		
 		try{			
 			//Checking if input is numeric
 			if(StringUtils.isNumeric(num)==false){
-				return "Please enter positive number";
+				return msgPositveNumber;
 			}
 			//checking length of number
 			if(num.length()>10){
-				return "Number too large to process. Maximum allowed length is 10";
+				return msgLargeNumber;
 			}
 			
 			//Checking the sign of number
 			int sign = Long.signum(Long.parseLong(num));
 			if(sign==-1){				
-				return "Please enter positive number";
+				return msgPositveNumber;
 			}
 			//checking if input is 0
 			if(Long.parseLong(num)==0){
-				return "NO";
+				return resultNo;
 			}
 			
 			//breaking input number into tokens
@@ -63,18 +67,18 @@ public class PerfectNumber {
 			
 			if(sum == n)
 	        {
-	            result="YES";
+	            result=resultYes;
 	        }
 	        else
 	        {
-	        	result="NO";    
+	        	result=resultNo;    
 	        } 
 			s.close();
 			
 		}catch(InputMismatchException ie){
 			ie.getMessage();
 			//validating input and returning message
-			return "Please enter positive number";
+			return msgPositveNumber;
 		}
 		
 		//final output

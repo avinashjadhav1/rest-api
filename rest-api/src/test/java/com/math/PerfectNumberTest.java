@@ -19,6 +19,11 @@ import io.restassured.response.Response;
 
 public class PerfectNumberTest {
 
+	private final String msgPositveNumber="Please enter positive number";
+	private final String msgLargeNumber="Number too large to process. Maximum allowed length is 10";
+	private final String resultYes="YES";
+	private final String resultNo="NO";
+	
 	@BeforeClass
 	public static void init() {
 		RestAssured.baseURI = "http://localhost";
@@ -40,7 +45,7 @@ public class PerfectNumberTest {
 		     Response res = get("/isperfect/6");   
 		        		           
 		     Assert.assertEquals(200,res.getStatusCode());    
-		     Assert.assertEquals("YES",res.asString());		        
+		     Assert.assertEquals(resultYes,res.asString());		        
 		        
 		}catch(RuntimeException re){
 			re.getMessage();
@@ -63,7 +68,7 @@ public class PerfectNumberTest {
 		     Response res = get("/isperfect/10");   
 		        		            
 		     Assert.assertEquals(200,res.getStatusCode());    
-		     Assert.assertEquals("NO",res.asString());		        
+		     Assert.assertEquals(resultNo,res.asString());		        
 		        
 		}catch(RuntimeException re){
 				re.getMessage();
@@ -113,7 +118,7 @@ public class PerfectNumberTest {
 		     Response res = get("/isperfect/abcd");   		        
 		            
 		     Assert.assertEquals(200,res.getStatusCode());    
-		     Assert.assertEquals("Please enter positive number",res.asString());
+		     Assert.assertEquals(msgPositveNumber,res.asString());
 		        
 		}catch(RuntimeException re){
 				re.getMessage();
@@ -138,7 +143,7 @@ public class PerfectNumberTest {
 		        
 		     Response res = get("/isperfect/-10");   		        
 		     
-		     Assert.assertEquals("Please enter positive number",res.asString());
+		     Assert.assertEquals(msgPositveNumber,res.asString());
 		        
 		}catch(RuntimeException re){
 				re.getMessage();
@@ -162,7 +167,7 @@ public class PerfectNumberTest {
 		        
 		     Response res = get("/isperfect/abcd1234");   		        
 		     
-		     Assert.assertEquals("Please enter positive number",res.asString());
+		     Assert.assertEquals(msgPositveNumber,res.asString());
 		        
 		}catch(RuntimeException re){
 				re.getMessage();
@@ -187,7 +192,7 @@ public class PerfectNumberTest {
 		        
 		     Response res = get("/isperfect/0");   		        
 		     
-		     Assert.assertEquals("NO",res.asString());
+		     Assert.assertEquals(resultNo,res.asString());
 		        
 		}catch(RuntimeException re){
 				re.getMessage();
@@ -212,7 +217,7 @@ public class PerfectNumberTest {
 		        
 		     Response res = get("/isperfect/12345678901");   		        
 		     
-		     Assert.assertEquals("Number too large to process. Maximum allowed length is 10",res.asString());
+		     Assert.assertEquals(msgLargeNumber,res.asString());
 		        
 		}catch(RuntimeException re){
 				re.getMessage();
